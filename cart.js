@@ -51,6 +51,24 @@ const classes = [
     name: 'World Religions',
     price: 15,
     quantity: 0
+  },
+  {
+    id: 5,
+    name: 'Spanish I',
+    price: 20,
+    quantity: 0
+  },
+  {
+    id: 6,
+    name: 'Chinese I',
+    price: 10,
+    quantity: 0
+  },
+  {
+    id: 7,
+    name: 'Algebra I',
+    price: 15,
+    quantity: 0
   }
 ];
 
