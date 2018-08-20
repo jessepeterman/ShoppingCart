@@ -1,0 +1,135 @@
+body {
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-end;
+}
+
+.cart-icon {
+  position: relative;
+  background-color: rgb(224, 224, 67);
+  border: 1px solid lightgray;
+  border-radius: 10px;
+  box-shadow: 1px 1px 5px;
+  cursor: pointer;
+  top: 0.5rem;
+  text-align: center;
+  right: 2rem;
+}
+
+.cart-icon > span {
+  font-size: 1rem;
+}
+
+.cart-icon > li {
+  list-style: none;
+  margin: 0 0.5rem;
+}
+
+.checkout-dropdown {
+  background-color: rgb(255, 255, 255);
+  border: 2px solid gray;
+  border-radius: 10px;
+  box-shadow: 1px 1px 5px;
+  position: absolute;
+  width: auto;
+  text-align: center;
+  top: 5rem;
+}
+
+.checkout-dropdown > li {
+  list-style: none;
+}
+
+.hidden {
+  display: none;
+}
+
+@keyframes slideInDown2 {
+  from {
+    transform: translate3d(0, -20%, 0);
+    visibility: visible;
+    opacity: 0;
+  }
+
+  to {
+    transform: translate3d(0, 0, 0);
+    opacity: 1;
+  }
+}
+
+.slideInDown2 {
+  animation-name: slideInDown2;
+}
+
+.checkout-dropdown > ul {
+  list-style: none;
+  text-align: left;
+  padding: 0 1rem;
+}
+
+.remove-button {
+  display: inline;
+  font-weight: 700;
+  color: red;
+  cursor: pointer;
+}
+
+.remove-button:hover {
+  color: rgb(209, 150, 150);
+}
+
+button {
+  cursor: pointer;
+}
+
+#classes-list {
+  width: 300px;
+}
+
+#classes-list > li {
+  list-style: none;
+}
+
+#classes-list > li:hover {
+  background-color: lightgray;
+  opacity: 0.7;
+  cursor: pointer;
+}
+
+@keyframes bounce2 {
+  from,
+  20%,
+  53%,
+  80%,
+  to {
+    animation-timing-function: cubic-bezier(0.215, 0.61, 0.355, 1);
+    transform: translate3d(0, 0, 0);
+  }
+
+  40%,
+  43% {
+    animation-timing-function: cubic-bezier(0.755, 0.05, 0.855, 0.06);
+    transform: translate3d(0, -15px, 0);
+  }
+
+  70% {
+    animation-timing-function: cubic-bezier(0.755, 0.05, 0.855, 0.06);
+    transform: translate3d(0, -7px, 0);
+  }
+
+  90% {
+    transform: translate3d(0, -4px, 0);
+  }
+}
+
+.bounce2 {
+  animation-name: bounce2;
+  transform-origin: center bottom;
+}
