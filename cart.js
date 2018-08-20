@@ -16,7 +16,7 @@ const cart = {
 const getSubTotal = cart => {
   cart.subTotal = 0;
   cart.classes.forEach(cartItem => {
-    cart.subTotal += cartItem.price;
+    cart.subTotal += cartItem.price * cartItem.quantity;
   });
   return cart.subTotal;
 };
@@ -99,15 +99,6 @@ const addToCart = e => {
   reloadCartPreview();
 };
 
-// const store = {
-//   cart: {
-//     classes: [],
-//     books: []
-//   },
-//   subTotal: 0
-// };
-
-// btnViewCart.addEventListener('click', e => showCart());
 cartIconClickable.addEventListener('click', e => showCart());
 
 const showCart = e => {
@@ -115,12 +106,6 @@ const showCart = e => {
   checkOutDropdown.classList.toggle('hidden');
   return false;
 };
-
-// const store = new Store();
-// cart.classes.push(classes[0]);
-// cart.classes.push(classes[2]);
-
-// cart.classes.push(classes[3]);
 
 const removeFromCart = id => {
   index = cart.classes.findIndex(x => x.id == id);
@@ -131,10 +116,6 @@ const removeFromCart = id => {
     cart.classes.splice(index, 1);
   }
   reloadCartPreview();
-
-  index = cart.classes.forEach(x => {
-    console.log(x);
-  });
 };
 
 const resetAnimation = (e, animationName) => {
@@ -143,30 +124,44 @@ const resetAnimation = (e, animationName) => {
   }, 1000);
 };
 
+const getNumberOfItemsInCart = () => {
+  let runningTotal = 0;
+  cart.classes.forEach(item => {
+    runningTotal += item.quantity;
+  });
+  return runningTotal;
+};
+
 const reloadCartPreview = () => {
   let count = 0;
   cartPreview.innerHTML = '';
 
-  document.querySelector('.cart-icon > span').innerHTML = `(${
-    cart.classes.length
-  } items)`;
+  document.querySelector(
+    '.cart-icon > span'
+  ).textContent = `(${getNumberOfItemsInCart()} items)`;
 
   if (cart.classes.length > 0) {
     cart.classes.forEach((x, index) => {
       let cartPreviewOutput = document.createElement('li');
-      cartPreviewOutput.innerHTML = `${++count}. ${x.name} - Qty: ${
+      cartPreviewOutput.innerText = `${++count}. ${x.name} - Qty: ${
         x.quantity
-      } <div class="remove-button" data-id="${x.id}"
-}">X</div>`;
+      }`;
+      let removeBtn = document.createElement('div');
+      removeBtn.classList.add('remove-button');
+      removeBtn.dataset.id = x.id;
+      removeBtn.textContent = 'X';
+      // `<div class="remove-button" data-id="${x.id}"
+      // }">X</div>`;
+      cartPreviewOutput.appendChild(removeBtn);
       cartPreview.appendChild(cartPreviewOutput);
     });
-    cartSubtotal.innerHTML = '';
+    cartSubtotal.textContent = '';
     let cartSub = document.createElement('li');
     cartSub.innerHTML = `Subtotal: $${getSubTotal(cart)}.00`;
     cartSubtotal.appendChild(cartSub);
   } else {
     let cartPreviewOutput = document.createElement('li');
-    cartPreviewOutput.innerHTML = 'Add items to your cart!';
+    cartPreviewOutput.textContent = 'Add items to your cart!';
     cartPreview.appendChild(cartPreviewOutput);
     cartSubtotal.innerHTML = '';
     let cartSub = document.createElement('li');
