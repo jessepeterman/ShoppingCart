@@ -74,6 +74,11 @@ body {
   padding: 0 1rem;
 }
 
+.checkout-dropdown,
+li {
+  list-style: none;
+}
+
 .remove-button {
   display: inline;
   font-weight: 700;

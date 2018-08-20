@@ -3,6 +3,7 @@ const cartIconClickable = document.querySelector('.cart-icon');
 const checkOutDropdown = document.querySelector('.checkout-dropdown');
 const cartPreview = document.querySelector('.checkout-dropdown > ul');
 const cartSubtotal = document.querySelector('#subtotal');
+const classesList = document.querySelector('#classes-list');
 
 let isDown = true;
 
@@ -122,8 +123,6 @@ const showCart = e => {
 // cart.classes.push(classes[3]);
 
 const removeFromCart = id => {
-  let isOneRemoved = false;
-
   index = cart.classes.findIndex(x => x.id == id);
   currentClass = cart.classes[index];
   if (index > -1 && currentClass.quantity > 1) {
@@ -145,8 +144,8 @@ const resetAnimation = (e, animationName) => {
 };
 
 const reloadCartPreview = () => {
-  let cartPreviewOutput = '';
   let count = 0;
+  cartPreview.innerHTML = '';
 
   document.querySelector('.cart-icon > span').innerHTML = `(${
     cart.classes.length
@@ -154,17 +153,26 @@ const reloadCartPreview = () => {
 
   if (cart.classes.length > 0) {
     cart.classes.forEach((x, index) => {
-      cartPreviewOutput += `<li>${++count}. ${x.name} - Qty: ${
+      let cartPreviewOutput = document.createElement('li');
+      cartPreviewOutput.innerHTML = `${++count}. ${x.name} - Qty: ${
         x.quantity
       } <div class="remove-button" data-id="${x.id}"
-}">X</div></li>`;
+}">X</div>`;
+      cartPreview.appendChild(cartPreviewOutput);
     });
-    cartSubtotal.innerHTML = `Subtotal: $${getSubTotal(cart)}.00`;
-    cartPreview.innerHTML = cartPreviewOutput;
+    cartSubtotal.innerHTML = '';
+    let cartSub = document.createElement('li');
+    cartSub.innerHTML = `Subtotal: $${getSubTotal(cart)}.00`;
+    cartSubtotal.appendChild(cartSub);
   } else {
-    cartPreviewOutput = '<li>Add items to your cart!</li>';
-    cartSubtotal.innerHTML = `Subtotal: $${getSubTotal(cart)}.00`;
-    cartPreview.innerHTML = cartPreviewOutput;
+    let cartPreviewOutput = document.createElement('li');
+    cartPreviewOutput.innerHTML = 'Add items to your cart!';
+    cartPreview.appendChild(cartPreviewOutput);
+    cartSubtotal.innerHTML = '';
+    let cartSub = document.createElement('li');
+    cartSub.innerHTML = `Subtotal: $${getSubTotal(cart)}.00`;
+    cartSubtotal.appendChild(cartSub);
+    // cartPreview.innerHTML = cartPreviewOutput;
   }
 
   document.querySelectorAll('.remove-button').forEach(x => {
@@ -174,6 +182,15 @@ const reloadCartPreview = () => {
   });
   // document.querySelectorAll('.checkout-dropdown > button').forEach(x => {
 };
+
+const addClassDiv = () => {
+  li = document.createElement('li');
+  li.innerHTML = 'Add items to your cart!';
+  classesList.appendChild(li);
+};
+
+addClassDiv();
+addClassDiv();
 
 showClassList();
 reloadCartPreview();
