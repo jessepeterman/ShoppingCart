@@ -125,8 +125,10 @@ const removeFromCart = id => {
   let isOneRemoved = false;
 
   index = cart.classes.findIndex(x => x.id == id);
-
-  if (index > -1) {
+  currentClass = cart.classes[index];
+  if (index > -1 && currentClass.quantity > 1) {
+    currentClass.quantity--;
+  } else if (index > -1) {
     cart.classes.splice(index, 1);
   }
   reloadCartPreview();
